@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deploy-video-streaming
+  labels:
+    app: ass1-video-streaming
+spec:
+  selector:
+    matchLabels:
+      app: ass1-video-streaming
+  template:
+    metadata:
+      labels:
+        app: ass1-video-streaming
+    spec:
+      containers:
+      - name: video-streaming
+        image: gcr.io/acit3495ass2/video_streaming
+        ports:
+        - containerPort: 8100
+        env:
+        - name: POD_IP
+          valueFrom:
+            fieldRef:
+              fieldPath: status.podIP
+        resources:
+          requests:
+            cpu: "50m"
+

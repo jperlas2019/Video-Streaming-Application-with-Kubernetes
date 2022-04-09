@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deploy-authentication
+  labels:
+    app: ass1-authentication
+spec:
+  selector:
+    matchLabels:
+      app: ass1-authentication
+  template:
+    metadata:
+      labels:
+        app: ass1-authentication
+    spec:
+      containers:
+      - name: authentication
+        image: gcr.io/acit3495ass2/authentication
+        ports:
+        - containerPort: 8110
+        env:
+        - name: POD_IP
+          valueFrom:
+            fieldRef:
+              fieldPath: status.podIP
+        resources:
+          requests:
+            cpu: "50m"

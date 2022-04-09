@@ -1,0 +1,10 @@
+FROM mysql:latest
+
+ENV MYSQL_ROOT_PASSWORD 1234
+ENV MYSQL_DATABASE videos
+ENV MYSQL_USER jperlas
+ENV MYSQL_PASSWORD 1234
+
+COPY my.cnf /etc/mysql/my.cnf
+
+EXPOSE 3306

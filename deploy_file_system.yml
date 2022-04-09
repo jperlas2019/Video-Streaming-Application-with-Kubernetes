@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deploy-file-system
+  labels:
+    app: ass1-file-system
+spec:
+  selector:
+    matchLabels:
+      app: ass1-file-system
+  template:
+    metadata:
+      labels:
+        app: ass1-file-system
+    spec:
+      containers:
+      - name: file-system
+        image: gcr.io/acit3495ass2/file_system
+        ports:
+        - containerPort: 8090
+        env:
+        - name: POD_IP
+          valueFrom:
+            fieldRef:
+              fieldPath: status.podIP
+        volumeMounts:
+        - name: nfs
+          mountPath: /var/src/app/videos
+        resources:
+          requests:
+            cpu: "50m"
+      volumes:
+      - name: nfs
+        persistentVolumeClaim:
+          claimName: nfs-pvc
+

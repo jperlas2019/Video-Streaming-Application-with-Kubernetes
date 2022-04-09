@@ -1,0 +1,58 @@
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: scale-file-system
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: deploy-file-system
+  minReplicas: 2
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 10
+
+---
+
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: scale-upload-video
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: deploy-upload-video
+  minReplicas: 2
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 10
+
+---
+
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: scale-authentication
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: deploy-authentication
+  minReplicas: 2
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 10
+
+---
+
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: scale-video-stream
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: deploy-video-streaming
+  minReplicas: 2
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 10
+

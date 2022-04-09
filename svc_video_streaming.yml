@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: lb-video-streaming
+spec:
+  type: LoadBalancer
+  loadBalancerIP: "146.148.63.89"
+  ports:
+  - port: 8100
+    targetPort: 8100
+  selector:
+    app: ass1-video-streaming

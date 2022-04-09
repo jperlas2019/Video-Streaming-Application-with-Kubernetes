@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deploy-upload-video
+  labels:
+    app: ass1-upload-video
+spec:
+  selector:
+    matchLabels:
+      app: ass1-upload-video
+  template:
+    metadata:
+      labels:
+        app: ass1-upload-video
+    spec:
+      containers:
+      - name: upload-video
+        image: gcr.io/acit3495ass2/upload_video
+        ports:
+        - containerPort: 8080
+        env:
+        - name: POD_IP
+          valueFrom:
+            fieldRef:
+              fieldPath: status.podIP
+        resources:
+          requests:
+            cpu: "50m"
+
+

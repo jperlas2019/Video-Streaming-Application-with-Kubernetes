@@ -1,0 +1,19 @@
+{
+  "name": "video_streaming",
+  "version": "1.0.0",
+  "description": "Play video file from remote file system",
+  "author": "Jaguar Perlas <jagperlas@gmail.com>",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "axios": "^0.26.0",
+    "body-parser": "^1.19.2",
+    "express": "^4.17.3",
+    "express-fileupload": "^1.3.1",
+    "express-session": "^1.17.2",
+    "http": "0.0.1-security",
+    "mysql2": "^2.3.3"
+  }
+}

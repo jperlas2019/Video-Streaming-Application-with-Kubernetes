@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deploy-mysql
+  labels:
+    app: ass1-mysql
+spec:
+  selector:
+    matchLabels:
+      app: ass1-mysql
+  template:
+    metadata:
+      labels:
+        app: ass1-mysql
+    spec:
+      containers:
+      - name: mysql
+        image: gcr.io/acit3495ass2/mysql
+        ports:
+        - containerPort: 3306
+        # volumeMounts:
+        # - name: nfs
+        #   mountPath: /var/lib/mysql
+        env:
+        - name: POD_IP
+          valueFrom:
+            fieldRef:
+              fieldPath: status.podIP
+      # volumes:
+      # - name: nfs
+      #   persistentVolumeClaim:
+      #     claimName: nfs-pvc

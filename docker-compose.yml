@@ -1,0 +1,61 @@
+version: '3'
+
+services:
+  db:
+    volumes:
+      - ass1_volume:/var/lib/mysql
+    image: ass1_mysql:1
+    restart: always
+    networks:
+      ass1_network:
+        ipv4_address: 192.168.100.10
+    
+  uploadjs:
+    depends_on:
+      - db
+    networks:
+      ass1_network:
+        ipv4_address: 192.168.100.20
+    image: ass1_uploadjs:1
+    ports:
+      - 8080:8080
+    restart: always
+
+  videostream:
+    depends_on:
+     - db
+    networks:
+      ass1_network:
+        ipv4_address: 192.168.100.50
+    image: ass1_streamjs:1
+    ports:
+     - 8100:8100
+    restart: always
+
+  storagepy:
+    depends_on:
+     - db
+    networks:
+      ass1_network:
+        ipv4_address: 192.168.100.30
+    image: ass1_storagepy:1
+    volumes:
+      - ass1_volume:/var/app/src
+
+  authpy:
+    networks:
+      ass1_network:
+        ipv4_address: 192.168.100.40
+    image: ass1_authpy:1
+
+
+
+volumes:
+  ass1_volume:
+
+networks:
+  ass1_network:
+    ipam:
+        driver: default
+        config:
+          - subnet: 192.168.100.0/24
